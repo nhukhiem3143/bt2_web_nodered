@@ -99,5 +99,41 @@ node "D:\nodejs\nodered\node_modules\node-red\red.js" -u "D:\nodejs\nodered\work
 7. nhắc nhẹ: github ko fake datetime được.
 8. sv được sử dụng AI để tham khảo.
 ---
+# 3. Cài đặt Apache
+## Bước 1: Cài đặt Apcahe cho windows
+**Download tại : https://www.apachelounge.com/download/**  
+Tải phiên bản phù hợp. Vd : httpd-2.4.65-250724-Win64-VS17.zip  
 
-# Bài làm
+## Bước 2. Giải nén Apache 
+Tạo thư mục và giải nén tại D:Apache\Apache24
+
+## Bước 3 : Cấu hình Apache
+### 1. Thêm dòng vào C:\Windows\System32\drivers\etc\hosts:
+   127.0.0.1 nguyennhukhiem.com
+### 2. Sửa Define SRVROOT trong D:\Apache24\conf\httpd.conf:  
+- Sửa thành đường dẫn đến thư mục đang đặt Apche24 : Define SRVROOT "d:/Apache/Apache24"
+- Bỏ dấu # ở : LoadModule vhost_alias_module modules/mod_vhost_alias.so và Include conf/extra/httpd-vhosts.conf
+
+### 2. Thêm vhost trong extra/httpd-vhosts.conf:
+Thay DocumentRoot bằng đường dẫn chứ thư mục web
+Đổi tên ServerName
+```
+<VirtualHost *:80>
+    ServerAdmin webmaster@dummy-host.example.com
+    DocumentRoot "E:/Web_App_Develop/Web_Apache/Web2"
+    ServerName web2.com
+    ServerAlias www.dummy-host.example.com
+    ErrorLog "logs/dummy-web2-error.log"
+    CustomLog "logs/dummy-web2-access.log" common
+
+    <Directory "E:/Web_App_Develop/Web_Apache/Web2">
+    	 Options Indexes FollowSymLinks
+   	 AllowOverride None
+   	 Require all granted
+    </Directory>
+</VirtualHost>
+```
+
+## 6. Chạy: D:\Apache24\bin\httpd.exe -k install
+   D:\Apache24\bin\httpd.exe -k start
+
