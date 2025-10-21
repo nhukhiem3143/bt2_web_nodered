@@ -15,6 +15,29 @@
 
 ---
 # 1. Giới thiệu
+## 1.1. Giới thiệu chung
+Trong bối cảnh phát triển mạnh mẽ của Internet of Things (IoT) và các hệ thống web động, Node-RED là một nền tảng lập trình trực quan dựa trên dòng dữ liệu (flow-based programming) giúp người dùng dễ dàng kết nối các thiết bị, xử lý dữ liệu và tương tác với cơ sở dữ liệu hoặc dịch vụ web mà không cần viết quá nhiều mã phức tạp.
+Dự án này được thực hiện nhằm xây dựng quy trình xử lý và cập nhật dữ liệu sản phẩm (bao gồm thông tin và hình ảnh) thông qua Node-RED. Hệ thống cho phép người dùng gửi yêu cầu cập nhật sản phẩm, lưu hình ảnh mới vào thư mục máy chủ, và thực hiện câu lệnh SQL UPDATE trên SQL Server để thay đổi dữ liệu tương ứng trong bảng SanPham.
+
+## 1.2. Mục tiêu của hệ thống
+**Mục tiêu của bài là:**
+- Xây dựng luồng xử lý (flow) trên Node-RED cho phép nhận dữ liệu từ người dùng hoặc API.
+- Kiểm tra và lưu hình ảnh sản phẩm vào thư mục trên máy chủ (ví dụ: D:\Apache\Apache24\nguyennhukhiem\images\).
+- Chuẩn bị và thực thi câu lệnh SQL UPDATE để cập nhật các trường như TenSP, GiaSP, MoTa, HinhAnh... trong cơ sở dữ liệu.
+- Kiểm tra lỗi, xử lý ngoại lệ và phản hồi lại cho người dùng (ví dụ: thông báo “Cập nhật thành công” hoặc “Lỗi thiếu dữ liệu”).
+
+## 1.3. Công cụ và công nghệ sử dụng
+1. Node-RED: Xây dựng luồng xử lý và logic nghiệp vụ.
+2. SQL Server 2022: Lưu trữ dữ liệu sản phẩm.
+3. Apache Server: Lưu trữ hình ảnh (thư mục public).
+4. JavaScript (Node-RED Function node): Xử lý logic cập nhật, kiểm tra dữ liệu, chuẩn bị câu lệnh SQL.
+5. HTTP Request/Response nodes: Tiếp nhận và phản hồi yêu cầu từ giao diện hoặc API.
+
+## 1.4. Ý nghĩa
+Việc sử dụng Node-RED giúp:
+- Đơn giản hóa quy trình lập trình backend nhờ giao diện kéo thả trực quan.
+- Tăng tốc phát triển hệ thống, phù hợp cho sinh viên và người mới học IoT/Web backend.
+Dễ bảo trì và mở rộng, có thể thêm nhiều chức năng như thêm sản phẩm, xóa sản phẩm, hoặc thống kê dữ liệu mà không cần thay đổi nhiều mã nguồn.
 
 ---
 # 2. Nội dung bài tập:
