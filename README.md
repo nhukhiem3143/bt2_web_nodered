@@ -3,8 +3,20 @@
 # NGÀY GIAO: 19/10/2025  
 # DEADLINE: 26/10/2025  
 ---
-## 2. NỘI DUNG BÀI TẬP:
-### 2.1. Cài đặt Apache web server:
+# Mục lục
+1. Giới thiệu
+2. Nội dung bài tập
+3. Cài đặt và cấu hình Apache
+4. Cài đặt và cấu hình nodejs, Node-RED
+5. CSDL (schema + sample data)
+6. Test API (curl / browser)
+7. Frontend (index.html, js, css)
+8. Kết luận & tự đánh giá
+
+## 1. Giới thiệu
+
+# 2. NỘI DUNG BÀI TẬP:
+## 2.1. Cài đặt Apache web server:
 - Vô hiệu hoá IIS: nếu iis đang chạy thì mở cmd quyền admin để chạy lệnh: iisreset /stop
 - Download apache server, giải nén ra ổ D, cấu hình các file:
   + D:\Apache24\conf\httpd.conf
@@ -78,7 +90,6 @@ node "D:\nodejs\nodered\node_modules\node-red\red.js" -u "D:\nodejs\nodered\work
 - đã hiểu quá trình cài đặt các phần mềm và các thư viện như nào?
 - đã hiểu cách sử dụng nodered để tạo api back-end như nào?
 - đã hiểu cách frond-end tương tác với back-end ra sao?
-
 ---
 # TIÊU CHÍ CHẤM ĐIỂM:
 1. y/c bắt buộc về thời gian: ko quá Deadline, quá: 0 điểm (ko có ngoại lệ)
@@ -110,25 +121,26 @@ Tạo thư mục và giải nén tại D:Apache\Apache24
 ## Bước 3 : Cấu hình Apache
 Để tạo Website với Domain : nguyennhukhiem.com , tạo domain cục bộ
 ### 1. Thêm dòng vào C:\Windows\System32\drivers\etc\hosts:
-   127.0.0.1 nguyennhukhiem.com
-### 2. Tạo 1 thư mục chứa web tại
-### 2. Sửa Define SRVROOT trong D:\Apache24\conf\httpd.conf:  
+- 127.0.0.1 nguyennhukhiem.com
+### 2. Tạo 1 thư mục chứa web tại D:\Apache\Apache24\nguyennhukhiem
+- Tạo 1 file index.html trong thư mực nguyennhukhiem
+### 3. Sửa Define SRVROOT trong D:\Apache24\conf\httpd.conf:  
 - Sửa thành đường dẫn đến thư mục đang đặt Apche24 : Define SRVROOT "d:/Apache/Apache24"
 - Bỏ dấu # ở : LoadModule vhost_alias_module modules/mod_vhost_alias.so và Include conf/extra/httpd-vhosts.conf
 
-### 2. Thêm vhost trong extra/httpd-vhosts.conf:
-Thay DocumentRoot bằng đường dẫn chứ thư mục web
-Đổi tên ServerName
+### 4. Thêm vhost trong extra/httpd-vhosts.conf:
+Trong <VirtualHost *:80>
+- Thay DocumentRoot bằng đường dẫn chứ thư mục web
+- Đổi tên ServerName
 ```
 <VirtualHost *:80>
     ServerAdmin webmaster@dummy-host.example.com
-    DocumentRoot "E:/Web_App_Develop/Web_Apache/Web2"
+    DocumentRoot "D:\Apache\Apache24\nguyennhukhiem"
     ServerName nguyennhukhiem.com
     ServerAlias www.dummy-host.example.com
-    ErrorLog "logs/dummy-web2-error.log"
-    CustomLog "logs/dummy-web2-access.log" common
-
-    <Directory "E:/Web_App_Develop/Web_Apache/Web2">
+    ErrorLog "logs/dummy-web-error.log"
+    CustomLog "logs/dummy-web-access.log" common
+    <Directory "D:\Apache\Apache24\nguyennhukhiem">
     	 Options Indexes FollowSymLinks
    	 AllowOverride None
    	 Require all granted
@@ -136,6 +148,11 @@ Thay DocumentRoot bằng đường dẫn chứ thư mục web
 </VirtualHost>
 ```
 
-## 6. Chạy: D:\Apache24\bin\httpd.exe -k install
-   D:\Apache24\bin\httpd.exe -k start
+## Bước 4 : Chạy Apache
+<img width="1086" height="107" alt="Screenshot 2025-10-22 002638" src="https://github.com/user-attachments/assets/e1b356bc-059d-4ce9-99e3-b29869b6c1a3" />
+
+## Kết quả
+<img width="1908" height="814" alt="image" src="https://github.com/user-attachments/assets/8bf3a9f3-f79c-49af-bf89-7a3b21834cbd" />  
+
+Đã chạy web trên Apcahe thành công
 
