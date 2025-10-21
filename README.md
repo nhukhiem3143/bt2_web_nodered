@@ -108,8 +108,10 @@ Tải phiên bản phù hợp. Vd : httpd-2.4.65-250724-Win64-VS17.zip
 Tạo thư mục và giải nén tại D:Apache\Apache24
 
 ## Bước 3 : Cấu hình Apache
+Để tạo Website với Domain : nguyennhukhiem.com , tạo domain cục bộ
 ### 1. Thêm dòng vào C:\Windows\System32\drivers\etc\hosts:
    127.0.0.1 nguyennhukhiem.com
+### 2. Tạo 1 thư mục chứa web tại
 ### 2. Sửa Define SRVROOT trong D:\Apache24\conf\httpd.conf:  
 - Sửa thành đường dẫn đến thư mục đang đặt Apche24 : Define SRVROOT "d:/Apache/Apache24"
 - Bỏ dấu # ở : LoadModule vhost_alias_module modules/mod_vhost_alias.so và Include conf/extra/httpd-vhosts.conf
@@ -121,7 +123,7 @@ Thay DocumentRoot bằng đường dẫn chứ thư mục web
 <VirtualHost *:80>
     ServerAdmin webmaster@dummy-host.example.com
     DocumentRoot "E:/Web_App_Develop/Web_Apache/Web2"
-    ServerName web2.com
+    ServerName nguyennhukhiem.com
     ServerAlias www.dummy-host.example.com
     ErrorLog "logs/dummy-web2-error.log"
     CustomLog "logs/dummy-web2-access.log" common
