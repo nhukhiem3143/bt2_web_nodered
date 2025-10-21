@@ -4,18 +4,20 @@
 # DEADLINE: 26/10/2025  
 ---
 # Mục lục
-1. Giới thiệu
-2. Nội dung bài tập
-3. Cài đặt và cấu hình Apache
-4. Cài đặt và cấu hình nodejs, Node-RED
-5. CSDL (schema + sample data)
-6. Test API (curl / browser)
-7. Frontend (index.html, js, css)
-8. Kết luận & tự đánh giá
+**1. Giới thiệu  
+2. Nội dung bài tập  
+3. Cài đặt và cấu hình Apache  
+4. Cài đặt và cấu hình nodejs, Node-RED  
+5. CSDL (schema + sample data)  
+6. Test API (curl / browser)  
+7. Frontend (index.html, js, css)  
+8. Kết luận & tự đánh giá**  
 
-## 1. Giới thiệu
+---
+# 1. Giới thiệu
 
-# 2. NỘI DUNG BÀI TẬP:
+---
+# 2. Nội dung bài tập:
 ## 2.1. Cài đặt Apache web server:
 - Vô hiệu hoá IIS: nếu iis đang chạy thì mở cmd quyền admin để chạy lệnh: iisreset /stop
 - Download apache server, giải nén ra ổ D, cấu hình các file:
@@ -153,6 +155,6 @@ Trong <VirtualHost *:80>
 
 ## Kết quả
 <img width="1908" height="814" alt="image" src="https://github.com/user-attachments/assets/8bf3a9f3-f79c-49af-bf89-7a3b21834cbd" />  
-
 Đã chạy web trên Apcahe thành công
 
+---
