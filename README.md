@@ -226,13 +226,106 @@ node-red-contrib-cron-plus
 ```
 <img width="768" height="829" alt="image" src="https://github.com/user-attachments/assets/ee1c1fd6-28f7-431c-aa26-ef9cea9fa53c" />
 
+## Bước 4 : Cài đặt mật khẩu cho Node-Red
+- Sửa file `D:\nodejs\nodered\work\settings.js` : 
+  tìm đến chỗ adminAuth, bỏ comment # ở đầu dòng (8 dòng), thay chuỗi mã hoá mật khẩu bằng chuỗi mới
+```
+  adminAuth: {
+        type: "credentials",
+        users: [{
+        username: "admin",
+            password: "chuỗi_mã_hoá_mật_khẩu",
+            permissions: "*"
+        }]
+    },
+```
+   với mã hoá mật khẩu có thể thiết lập bằng tool: https://tms.tnut.edu.vn/pw.php  
 
+<img width="1122" height="443" alt="image" src="https://github.com/user-attachments/assets/21db3acc-8d5a-4b7b-9b36-9de8eb7d04e6" />  
 
+- Sau đó chạy lại nodered bằng cách: mở cmd, vào thư mục `D:\nodejs\nodered` và chạy lệnh `nssm restart a1-nodered`  
 
+<img width="540" height="181" alt="image" src="https://github.com/user-attachments/assets/cc82e2bc-6d91-486b-a457-a1de89a183f8" />  
 
+- Khi đó nodered sẽ yêu cầu nhập mật khẩu mới vào được giao diện cho admin tại: http://localhost:1880  
+<img width="1850" height="1016" alt="image" src="https://github.com/user-attachments/assets/d8b0fade-66d6-4d42-a25c-8f5eb554ad93" />
 
+# 5. Tạo CSDL (schema + sample data)  
+- Cơ sở dữ liệu được thiết kế nhằm lưu trữ và quản lý thông tin sản phẩm trong hệ thống.
+- Hệ thống này mô phỏng một cửa hàng trực tuyến (online store), trong đó mỗi sản phẩm có các thông tin cơ bản như tên, loại, giá, mô tả, số lượng và hình ảnh minh họa.
+### Tạo DB name : QL_Shop  
+### Table name : SanPham  
+### Server name : NguyenNhuKhiem\KHIEM_SQL2022
+### Port : 1433
+<img width="739" height="357" alt="image" src="https://github.com/user-attachments/assets/8438a5e2-ae88-4d54-a31f-7865b156edd9" />  
 
+### Dữ liệu mẫu :  
+<img width="1462" height="752" alt="image" src="https://github.com/user-attachments/assets/7219db9f-778c-404c-b061-99c17e0b682d" />  
 
+# 6. Test API (curl / browser)  
+## API Truy vấn tìm kiếm sản phẩm 
+- Tại flow1 trên nodered, sử dụng node `http in` và `http response` để tạo api
+- Thêm node `MSSQL` để truy vấn tới cơ sở dữ liệu
+- logic flow sẽ gồm 4 node theo thứ tự sau: 
+### Bước 1: Thêm http in  : dùng GET , URL đặt tuỳ ý, ví dụ: /timkiem
+<img width="635" height="350" alt="image" src="https://github.com/user-attachments/assets/38e22fe6-e648-4f3f-ab1c-000aab15bdd1" />  
+
+### Bước 2: Thêm node function : để tiền xử lý dữ liệu gửi đến
+<img width="802" height="438" alt="image" src="https://github.com/user-attachments/assets/58728e5d-ee8c-438c-929a-3ccc478def8e" />  
+
+### Bước 3: Thêm node MSSQL: để truy vấn dữ liệu tới CSDL, nhận tham số từ node tiền xử lý
+<img width="644" height="615" alt="image" src="https://github.com/user-attachments/assets/3ac0923e-e5cf-4702-8abd-93820ad14e33" />  
+<img width="619" height="766" alt="image" src="https://github.com/user-attachments/assets/483543aa-815b-4777-9687-7905619fe938" />  
+
+### Bước 4: Thêm node http response: để phản hồi dữ liệu về client: Status Code=200, Header add : Content-Type = application/json
+<img width="632" height="439" alt="image" src="https://github.com/user-attachments/assets/e2bef361-ee60-4711-abe2-dd087a030c38" />
+
+### Bước 5: Thêm node `debug` để quan sát giá trị trung gian.
+<img width="632" height="436" alt="image" src="https://github.com/user-attachments/assets/d77e450b-8b3e-4ff4-808e-3b791ea45355" />  
+
+## Kết quả
+<img width="1544" height="295" alt="image" src="https://github.com/user-attachments/assets/822b30c8-a235-4a86-9fb2-0835d5d494c7" />
+
+### Test API : Tìm kiếm sản phẩm 
+- **Ví dụ : tìm kiếm bánh** http://localhost:1880/timkiem?q=bánh
+<img width="759" height="905" alt="image" src="https://github.com/user-attachments/assets/ea09708d-376b-4c34-9f87-f8364202e459" />  
+
+Ta có thể thấy khi tìm kiếm từ 'bánh' có thể tìm thấy 3 sản phẩm được phản hồi về client dưới dạng json.  
+
+- **Quan sát trong debug cũng có 3 sản phẩm đã tìm thấy**
+<img width="390" height="771" alt="image" src="https://github.com/user-attachments/assets/630ed936-caf8-4320-a31e-6974f8b27dfa" />
+
+Như vậy đã API tìm kiếm đã hoạt động thành công.
+
+## API Thêm sản phẩm
+- Dùng Method : POST
+<img width="1798" height="333" alt="image" src="https://github.com/user-attachments/assets/dc90abb6-3585-47b2-98a3-9edb5b9b06a1" />
+
+### Test API Thêm sản phẩm
+- Thêm 1 node Inject với nội dung json để thêm sản phẩm
+<img width="656" height="273" alt="image" src="https://github.com/user-attachments/assets/a5d84c5e-e8ec-4d6e-9567-785dde3fce19" />
+
+```
+{
+    "TenSP": "Bút bi Thiên Long",
+    "LoaiSP": "Văn phòng phẩm",
+    "Gia": 50003,
+    "SoLuong": 2040,
+    "MoTa": "Bút bi mực xanh, đầu nhỏ, viết mượt",
+    "HinhAnh": null
+}
+```
+### Kết quả :
+- Trong Debug
+<img width="480" height="401" alt="image" src="https://github.com/user-attachments/assets/9159d0b3-e232-46df-8b25-38ae54207954" />
+
+## API Sửa sản phẩm
+- Dùng Method : PUT
+<img width="1709" height="276" alt="image" src="https://github.com/user-attachments/assets/328d2bcc-6b87-4ed1-9a3d-7fb367af622e" />
+
+## API Xoá sản phẩm
+- Dùng Method : DELETE
+<img width="1615" height="298" alt="image" src="https://github.com/user-attachments/assets/6316185f-b03c-4379-85c4-fce4a83a79f9" />
 
 
 
