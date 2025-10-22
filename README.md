@@ -181,3 +181,39 @@ Trong <VirtualHost *:80>
 Đã chạy web trên Apcahe thành công
 
 ---
+# 4. Cài đặt và cấu hình nodejs, Node-RED  
+# Bước 1 : Cài đặt nodejs:
++ Download file tại : https://nodejs.org/dist/v22.21.0/node-v22.21.0-x64.msi
++ Cài đặt vào thư mục `D:\nodejs`
+- Cài đặt nodered:
+  + chạy cmd, vào thư mục `D:\nodejs`, chạy lệnh `npm install -g --unsafe-perm node-red --prefix "D:\nodejs\nodered"`
+  + download file: https://nssm.cc/release/nssm-2.24.zip
+    giải nén được file nssm.exe
+    copy nssm.exe vào thư mục `D:\nodejs\nodered\`
+  + tạo file "D:\nodejs\nodered\run-nodered.cmd" với nội dung (5 dòng sau):
+```
+@echo off
+REM fix path
+set PATH=D:\nodejs;%PATH%
+REM Run Node-RED
+```
+node "D:\nodejs\nodered\node_modules\node-red\red.js" -u "D:\nodejs\nodered\work" %*
+  + mở cmd, chuyển đến thư mục: `D:\nodejs\nodered`
+  + cài đặt service `a1-nodered` bằng lệnh: nssm.exe install a1-nodered "D:\nodejs\nodered\run-nodered.cmd"
+  + chạy service `a1-nodered` bằng lệnh: `nssm start a1-nodered`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
