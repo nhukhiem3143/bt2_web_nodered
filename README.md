@@ -317,7 +317,16 @@ Như vậy đã API tìm kiếm đã hoạt động thành công.
 ```
 ### Kết quả :
 - Trong Debug
+
 <img width="480" height="401" alt="image" src="https://github.com/user-attachments/assets/9159d0b3-e232-46df-8b25-38ae54207954" />
+
+- Test API bằng Postman
+
+<img width="1281" height="613" alt="image" src="https://github.com/user-attachments/assets/33b7fb5e-4d79-48af-94da-71e3f403cc12" />  
+
+- Trong SQL cũng đã thêm thành công
+
+<img width="1520" height="129" alt="image" src="https://github.com/user-attachments/assets/02eff09a-bdc5-4090-9c14-01cbc932eeec" />  
 
 ## API Sửa sản phẩm
 - Dùng Method : PUT
