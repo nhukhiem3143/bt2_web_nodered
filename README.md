@@ -182,14 +182,14 @@ Trong <VirtualHost *:80>
 
 ---
 # 4. Cài đặt và cấu hình nodejs, Node-RED  
-# Bước 1 : Cài đặt nodejs:
+## Bước 1 : Cài đặt nodejs:
 + Download file tại : https://nodejs.org/dist/v22.21.0/node-v22.21.0-x64.msi
 + Cài đặt vào thư mục `D:\nodejs`
-# Bước 2: Cài đặt nodered:
-+ chạy cmd, vào thư mục `D:\nodejs`, chạy lệnh `npm install -g --unsafe-perm node-red --prefix "D:\nodejs\nodered"`  
+## Bước 2: Cài đặt nodered:
++ Chạy cmd, vào thư mục `D:\nodejs`, chạy lệnh `npm install -g --unsafe-perm node-red --prefix "D:\nodejs\nodered"`  
 <img width="938" height="180" alt="image" src="https://github.com/user-attachments/assets/c5999592-1298-4ec2-9ec0-6c6544489beb" />  
 
-+ download file: https://nssm.cc/release/nssm-2.24.zip giải nén được file nssm.exe
++ Download file: https://nssm.cc/release/nssm-2.24.zip giải nén được file nssm.exe
 + Copy nssm.exe vào thư mục `D:\nodejs\nodered\`
 + Tạo file "D:\nodejs\nodered\run-nodered.cmd" với nội dung (5 dòng sau):
 ```
@@ -201,15 +201,29 @@ node "D:\nodejs\nodered\node_modules\node-red\red.js" -u "D:\nodejs\nodered\work
 ```
 <img width="1007" height="444" alt="image" src="https://github.com/user-attachments/assets/cdecc733-900f-4839-843f-88787dd70efe" />  
 
-# Bước 3 : Chạy Node-Red
+## Bước 3 : Chạy Node-Red
 + Mở cmd với quyền Admin, chuyển đến thư mục: `D:\nodejs\nodered`
-+ Cài đặt service `a1-nodered` bằng lệnh: nssm.exe install a1-nodered "D:\nodejs\nodered\run-nodered.cmd"
++ Cài đặt service `a1-nodered` bằng lệnh: nssm.exe install a1-nodered "D:\nodejs\nodered\run-nodered.cmd"  
 <img width="938" height="180" alt="Screenshot 2025-10-22 202420" src="https://github.com/user-attachments/assets/4e5442f5-d6e9-4f9d-a77d-4e930c68be96" />
 
-+ Chạy service `a1-nodered` bằng lệnh: `nssm start a1-nodered`
++ Chạy service `a1-nodered` bằng lệnh: `nssm start a1-nodered`  
 
 <img width="604" height="92" alt="Screenshot 2025-10-22 202617" src="https://github.com/user-attachments/assets/73f3661f-6aa0-42e8-994e-ed17ad6c4c3e" />  
 
+**Node-Red sẽ chạy ở http://localhost:1880**  
+
+<img width="1837" height="920" alt="image" src="https://github.com/user-attachments/assets/bcf612de-e543-4caa-afab-ecdf9ca23eb0" />  
+
+## Cài đặt các thư viện cần thiết 
+node-red-contrib-mssql-plus,
+node-red-node-mysql,
+node-red-contrib-telegrambot,
+node-red-contrib-moment, 
+node-red-contrib-influxdb, 
+node-red-contrib-duckdns, 
+node-red-contrib-cron-plus
+
+<img width="768" height="829" alt="image" src="https://github.com/user-attachments/assets/ee1c1fd6-28f7-431c-aa26-ef9cea9fa53c" />
 
 
 
