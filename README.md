@@ -214,15 +214,16 @@ node "D:\nodejs\nodered\node_modules\node-red\red.js" -u "D:\nodejs\nodered\work
 
 <img width="1837" height="920" alt="image" src="https://github.com/user-attachments/assets/bcf612de-e543-4caa-afab-ecdf9ca23eb0" />  
 
-## Cài đặt các thư viện cần thiết 
-node-red-contrib-mssql-plus,
-node-red-node-mysql,
-node-red-contrib-telegrambot,
-node-red-contrib-moment, 
-node-red-contrib-influxdb, 
-node-red-contrib-duckdns, 
+## Cài đặt các thư viện cần thiết
+```
+node-red-contrib-mssql-plus
+node-red-node-mysql
+node-red-contrib-telegrambot
+node-red-contrib-moment
+node-red-contrib-influxdb
+node-red-contrib-duckdns
 node-red-contrib-cron-plus
-
+```
 <img width="768" height="829" alt="image" src="https://github.com/user-attachments/assets/ee1c1fd6-28f7-431c-aa26-ef9cea9fa53c" />
 
 
