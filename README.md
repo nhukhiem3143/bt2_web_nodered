@@ -298,7 +298,7 @@ Ta có thể thấy khi tìm kiếm từ 'bánh' có thể tìm thấy 3 sản p
 Như vậy đã API tìm kiếm đã hoạt động thành công.
 
 ## API Thêm sản phẩm
-- Dùng Method : POST
+- **Dùng Method : POST**
 <img width="1798" height="333" alt="image" src="https://github.com/user-attachments/assets/dc90abb6-3585-47b2-98a3-9edb5b9b06a1" />
 
 ### Test API Thêm sản phẩm
@@ -316,31 +316,93 @@ Như vậy đã API tìm kiếm đã hoạt động thành công.
 }
 ```
 ### Kết quả :
-- Trong Debug
+- **Trong Debug**
 
 <img width="480" height="401" alt="image" src="https://github.com/user-attachments/assets/9159d0b3-e232-46df-8b25-38ae54207954" />
 
-- Test API bằng Postman
+- **Test API bằng Postman**
 
 <img width="1281" height="613" alt="image" src="https://github.com/user-attachments/assets/33b7fb5e-4d79-48af-94da-71e3f403cc12" />  
 
-- Trong SQL cũng đã thêm thành công
+- **Trong SQL cũng đã thêm thành công**
 
 <img width="1520" height="129" alt="image" src="https://github.com/user-attachments/assets/02eff09a-bdc5-4090-9c14-01cbc932eeec" />  
 
 ## API Sửa sản phẩm
-- Dùng Method : PUT
+- **Dùng Method : PUT**
 <img width="1709" height="276" alt="image" src="https://github.com/user-attachments/assets/328d2bcc-6b87-4ed1-9a3d-7fb367af622e" />
 
+### Test API Sửa sản phẩm 
+- **Test API bằng Postman**
+
+<img width="1285" height="773" alt="image" src="https://github.com/user-attachments/assets/479fe80b-a69f-40a1-b40f-6189353c3ef0" />  
+
+- **Cập nhật rong SQL**
+
+<img width="1179" height="129" alt="image" src="https://github.com/user-attachments/assets/c39f18d3-203f-4193-85ef-8795875ea183" />  
+
 ## API Xoá sản phẩm
-- Dùng Method : DELETE
-<img width="1615" height="298" alt="image" src="https://github.com/user-attachments/assets/6316185f-b03c-4379-85c4-fce4a83a79f9" />
+- **Dùng Method : DELETE**
 
+<img width="1615" height="298" alt="image" src="https://github.com/user-attachments/assets/6316185f-b03c-4379-85c4-fce4a83a79f9" />  
 
+### Test API Xoá sản phẩm  
+- **Test API bằng Postman**
+<img width="1282" height="737" alt="image" src="https://github.com/user-attachments/assets/4ec9935d-36c8-4563-974c-59a225d732bc" />  
 
+- **Cập nhật rong SQL**
+- Đã xoá sản phẩm id=70
 
+<img width="1161" height="157" alt="image" src="https://github.com/user-attachments/assets/78c08645-547c-435a-95d0-7f2c11f40f6c" />  
 
+# 7. Frontend (index.html, js, css)  
+- Web form gồm các file : index.html, nguyennhukhiem.js, nguyennhukhiem.css
+  cả 3 file này đặt trong thư mục: `D:\Apache\Apache24\nguyennhukhiem`
+<img width="1918" height="1017" alt="image" src="https://github.com/user-attachments/assets/fe49509c-f243-4978-882d-229df13c1d69" />
 
+## Giao diện
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5c596592-dfde-4496-936a-c088bea69a89" />  
 
+#### Tìm kiếm
 
+<img width="1911" height="1022" alt="image" src="https://github.com/user-attachments/assets/fa8c2367-a38e-4dd7-9341-2ded4088cabd" />  
+
+### Quản lý sản phẩm  
+
+<img width="1919" height="1017" alt="image" src="https://github.com/user-attachments/assets/d3cd096c-19d2-47aa-a046-bd0bcceb3606" />  
+
+#### Thêm sản phẩm  
+
+<img width="1235" height="332" alt="image" src="https://github.com/user-attachments/assets/93a89153-4cd5-4c10-a84f-fa23495c8603" />  
+
+- Thêm vào SQL  
+<img width="1334" height="91" alt="image" src="https://github.com/user-attachments/assets/dd708930-44c1-4392-bbf5-119eca73e917" />  
+
+#### Sửa sản phẩm  
+
+<img width="1193" height="125" alt="image" src="https://github.com/user-attachments/assets/4c2da8b8-5bb0-449e-8ae9-4fb2805989f8" />  
+
+- Thay đổi trong SQL
+
+<img width="1196" height="83" alt="image" src="https://github.com/user-attachments/assets/e3db63c4-571b-44fa-acc8-4e078a50a185" />  
+
+#### Xoá sản phẩm
+
+<img width="1873" height="905" alt="image" src="https://github.com/user-attachments/assets/9c83d811-b469-4ed4-9411-14675f0bba24" />  
+
+# 8. Kết luận & tự đánh giá
+- **Về cài đặt phần mềm và thư viện:**  
+    - Em đã nắm được quy trình cài đặt và cấu hình các công cụ cần thiết như Node.js, Node-RED, Microsoft SQL Server và các node mở rộng (node-mssql, node-file, node-http).  
+    - Quá trình cài đặt giúp em hiểu cách các thành phần này phối hợp để hình thành một hệ thống back-end hoàn chỉnh.  
+
+- **Về sử dụng Node-RED để tạo API back-end:**
+    - Em đã hiểu rõ cách tạo các API RESTful trong Node-RED bằng các node như HTTP In, Function, MSSQL, File, HTTP Response…  
+    - Em cũng biết cách xử lý dữ liệu đầu vào, cập nhật cơ sở dữ liệu, lưu/xóa ảnh khi thêm hoặc sửa sản phẩm, và gửi phản hồi dạng JSON cho client.   
+    - Qua đó, em hiểu được luồng xử lý từ request → xử lý logic → truy vấn SQL → phản hồi kết quả trong một API back-end.  
+ 
+- **Về tương tác giữa front-end và back-end:**  
+    - Em đã hiểu cơ chế front-end gửi request HTTP (POST, PUT, DELETE, GET) đến các API của Node-RED, truyền dữ liệu dạng JSON (hoặc form-data nếu có file ảnh), và back-end trả về dữ liệu JSON để front-end hiển thị hoặc xử lý.  
+    - Điều này giúp em hình dung được sự liên kết giữa giao diện người dùng và máy chủ xử lý, cũng như tầm quan trọng của việc thiết kế API rõ ràng, đúng chuẩn.  
+
+# The End
