@@ -8,7 +8,7 @@
 2. Nội dung bài tập  
 3. Cài đặt và cấu hình Apache  
 4. Cài đặt và cấu hình nodejs, Node-RED  
-5. CSDL (schema + sample data)  
+5. Tạo CSDL (schema + sample data)  
 6. Test API (curl / browser)  
 7. Frontend (index.html, js, css)  
 8. Kết luận & tự đánh giá**  
@@ -185,22 +185,32 @@ Trong <VirtualHost *:80>
 # Bước 1 : Cài đặt nodejs:
 + Download file tại : https://nodejs.org/dist/v22.21.0/node-v22.21.0-x64.msi
 + Cài đặt vào thư mục `D:\nodejs`
-- Cài đặt nodered:
-  + chạy cmd, vào thư mục `D:\nodejs`, chạy lệnh `npm install -g --unsafe-perm node-red --prefix "D:\nodejs\nodered"`
-  + download file: https://nssm.cc/release/nssm-2.24.zip
-    giải nén được file nssm.exe
-    copy nssm.exe vào thư mục `D:\nodejs\nodered\`
-  + tạo file "D:\nodejs\nodered\run-nodered.cmd" với nội dung (5 dòng sau):
+# Bước 2: Cài đặt nodered:
++ chạy cmd, vào thư mục `D:\nodejs`, chạy lệnh `npm install -g --unsafe-perm node-red --prefix "D:\nodejs\nodered"`  
+<img width="938" height="180" alt="image" src="https://github.com/user-attachments/assets/c5999592-1298-4ec2-9ec0-6c6544489beb" />  
+
++ download file: https://nssm.cc/release/nssm-2.24.zip giải nén được file nssm.exe
++ Copy nssm.exe vào thư mục `D:\nodejs\nodered\`
++ Tạo file "D:\nodejs\nodered\run-nodered.cmd" với nội dung (5 dòng sau):
 ```
 @echo off
 REM fix path
 set PATH=D:\nodejs;%PATH%
 REM Run Node-RED
-```
 node "D:\nodejs\nodered\node_modules\node-red\red.js" -u "D:\nodejs\nodered\work" %*
-  + mở cmd, chuyển đến thư mục: `D:\nodejs\nodered`
-  + cài đặt service `a1-nodered` bằng lệnh: nssm.exe install a1-nodered "D:\nodejs\nodered\run-nodered.cmd"
-  + chạy service `a1-nodered` bằng lệnh: `nssm start a1-nodered`
+```
+<img width="1007" height="444" alt="image" src="https://github.com/user-attachments/assets/cdecc733-900f-4839-843f-88787dd70efe" />  
+
+# Bước 3 : Chạy Node-Red
++ Mở cmd với quyền Admin, chuyển đến thư mục: `D:\nodejs\nodered`
++ Cài đặt service `a1-nodered` bằng lệnh: nssm.exe install a1-nodered "D:\nodejs\nodered\run-nodered.cmd"
+<img width="938" height="180" alt="Screenshot 2025-10-22 202420" src="https://github.com/user-attachments/assets/4e5442f5-d6e9-4f9d-a77d-4e930c68be96" />
+
++ Chạy service `a1-nodered` bằng lệnh: `nssm start a1-nodered`
+
+<img width="604" height="92" alt="Screenshot 2025-10-22 202617" src="https://github.com/user-attachments/assets/73f3661f-6aa0-42e8-994e-ed17ad6c4c3e" />  
+
+
 
 
 
