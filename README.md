@@ -16,11 +16,9 @@
 ---
 # 1. Giới thiệu
 ## 1.1. Giới thiệu chung
-Trong bối cảnh phát triển mạnh mẽ của Internet of Things (IoT) và các hệ thống web động, Node-RED là một nền tảng lập trình trực quan dựa trên dòng dữ liệu (flow-based programming) giúp người dùng dễ dàng kết nối các thiết bị, xử lý dữ liệu và tương tác với cơ sở dữ liệu hoặc dịch vụ web mà không cần viết quá nhiều mã phức tạp.
 Dự án này được thực hiện nhằm xây dựng quy trình xử lý và cập nhật dữ liệu sản phẩm (bao gồm thông tin và hình ảnh) thông qua Node-RED. Hệ thống cho phép người dùng gửi yêu cầu cập nhật sản phẩm, lưu hình ảnh mới vào thư mục máy chủ, và thực hiện câu lệnh SQL UPDATE trên SQL Server để thay đổi dữ liệu tương ứng trong bảng SanPham.
 
-## 1.2. Mục tiêu của hệ thống
-**Mục tiêu của bài là:**
+## 1.2. Mục tiêu của bài
 - Xây dựng luồng xử lý (flow) trên Node-RED cho phép nhận dữ liệu từ người dùng hoặc API.
 - Kiểm tra và lưu hình ảnh sản phẩm vào thư mục trên máy chủ (ví dụ: D:\Apache\Apache24\nguyennhukhiem\images\).
 - Chuẩn bị và thực thi câu lệnh SQL UPDATE để cập nhật các trường như TenSP, GiaSP, MoTa, HinhAnh... trong cơ sở dữ liệu.
@@ -32,12 +30,6 @@ Dự án này được thực hiện nhằm xây dựng quy trình xử lý và 
 3. Apache Server: Lưu trữ hình ảnh (thư mục public).
 4. JavaScript (Node-RED Function node): Xử lý logic cập nhật, kiểm tra dữ liệu, chuẩn bị câu lệnh SQL.
 5. HTTP Request/Response nodes: Tiếp nhận và phản hồi yêu cầu từ giao diện hoặc API.
-
-## 1.4. Ý nghĩa
-Việc sử dụng Node-RED giúp:
-- Đơn giản hóa quy trình lập trình backend nhờ giao diện kéo thả trực quan.
-- Tăng tốc phát triển hệ thống, phù hợp cho sinh viên và người mới học IoT/Web backend.
-Dễ bảo trì và mở rộng, có thể thêm nhiều chức năng như thêm sản phẩm, xóa sản phẩm, hoặc thống kê dữ liệu mà không cần thay đổi nhiều mã nguồn.
 
 ---
 # 2. Nội dung bài tập:
@@ -364,7 +356,7 @@ Như vậy đã API tìm kiếm đã hoạt động thành công.
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5c596592-dfde-4496-936a-c088bea69a89" />  
 
-#### Tìm kiếm
+### Tìm kiếm
 
 <img width="1911" height="1022" alt="image" src="https://github.com/user-attachments/assets/fa8c2367-a38e-4dd7-9341-2ded4088cabd" />  
 
@@ -372,14 +364,14 @@ Như vậy đã API tìm kiếm đã hoạt động thành công.
 
 <img width="1919" height="1017" alt="image" src="https://github.com/user-attachments/assets/d3cd096c-19d2-47aa-a046-bd0bcceb3606" />  
 
-#### Thêm sản phẩm  
+### Thêm sản phẩm  
 
 <img width="1235" height="332" alt="image" src="https://github.com/user-attachments/assets/93a89153-4cd5-4c10-a84f-fa23495c8603" />  
 
 - Thêm vào SQL  
 <img width="1334" height="91" alt="image" src="https://github.com/user-attachments/assets/dd708930-44c1-4392-bbf5-119eca73e917" />  
 
-#### Sửa sản phẩm  
+### Sửa sản phẩm  
 
 <img width="1193" height="125" alt="image" src="https://github.com/user-attachments/assets/4c2da8b8-5bb0-449e-8ae9-4fb2805989f8" />  
 
