@@ -1,0 +1,717 @@
+[
+    {
+        "id": "27ef7aab3842140d",
+        "type": "tab",
+        "label": "Cửa hàng Bách hoá xanh",
+        "disabled": false,
+        "info": "# Cửa hàng của Như Khiêm",
+        "env": []
+    },
+    {
+        "id": "8116e083b117f435",
+        "type": "group",
+        "z": "27ef7aab3842140d",
+        "name": "Thêm sản phẩm",
+        "style": {
+            "label": true,
+            "color": "#000000",
+            "stroke": "#0070c0"
+        },
+        "nodes": [
+            "fdceae81441c4c77",
+            "b521a65bbf8210f0",
+            "1cad2f7b9ceafa90",
+            "255feac48839031c",
+            "d677b751cffe7124",
+            "19009041121dd3e9",
+            "a8aa2d9ad0c98a21",
+            "1ee5a1719de03e5a",
+            "c4dc148d79e0c22f",
+            "6cd460947ce116b1"
+        ],
+        "x": 154,
+        "y": 319,
+        "w": 1692,
+        "h": 262
+    },
+    {
+        "id": "1a8e66f2282184be",
+        "type": "group",
+        "z": "27ef7aab3842140d",
+        "name": "Tìm kiếm sản phẩm",
+        "style": {
+            "label": true,
+            "color": "#000000",
+            "stroke": "#92d04f",
+            "stroke-opacity": "0.91"
+        },
+        "nodes": [
+            "22dd73d47bcc346b",
+            "a741453c3a5ba367",
+            "52f4b3b183ce4842",
+            "8c57f95cf1cfe7c4",
+            "144344c6d2e89725"
+        ],
+        "x": 174,
+        "y": 79,
+        "w": 1212,
+        "h": 202
+    },
+    {
+        "id": "0934046e3a0e276b",
+        "type": "group",
+        "z": "27ef7aab3842140d",
+        "name": "Sửa sản phẩm",
+        "style": {
+            "label": true,
+            "color": "#000000",
+            "stroke": "#ffC000"
+        },
+        "nodes": [
+            "decf16bfb644c5c4",
+            "c4e393bdfe158554",
+            "a756c2aae5402246",
+            "e1e6015122f21997",
+            "37b63c6912760414",
+            "b1b2b4b6331d85a4"
+        ],
+        "x": 154,
+        "y": 679,
+        "w": 1612,
+        "h": 222
+    },
+    {
+        "id": "f15b3167c14de10e",
+        "type": "group",
+        "z": "27ef7aab3842140d",
+        "name": "Xóa sản phẩm",
+        "style": {
+            "label": true,
+            "color": "#000000",
+            "stroke": "#ff0000"
+        },
+        "nodes": [
+            "c8bc470f249a0d28",
+            "089b0f45f7f04323",
+            "c293f26bb56d0373",
+            "20ae0816ea0d5194",
+            "4492a5d447d9fcbe",
+            "ebe5c1ad51c4b47c"
+        ],
+        "x": 164,
+        "y": 979,
+        "w": 1512,
+        "h": 242
+    },
+    {
+        "id": "cf909bcd9ab32d04",
+        "type": "MSSQL-CN",
+        "tdsVersion": "7_4",
+        "name": "SQL_QLShop",
+        "server": "NguyenNhuKhiem\\KHIEM_SQL2022",
+        "port": "1433",
+        "encyption": false,
+        "trustServerCertificate": false,
+        "database": "QL_Shop",
+        "useUTC": true,
+        "connectTimeout": "15000",
+        "requestTimeout": "15000",
+        "cancelTimeout": "5000",
+        "pool": "5",
+        "parseJSON": false,
+        "enableArithAbort": true,
+        "readOnlyIntent": false
+    },
+    {
+        "id": "fdceae81441c4c77",
+        "type": "function",
+        "z": "27ef7aab3842140d",
+        "g": "8116e083b117f435",
+        "name": "function - Xử lý dữ liệu & lưu file",
+        "func": "let fields = {};\nif (msg.req && msg.req.body) fields = msg.req.body;\nelse if (msg.payload) fields = msg.payload;\n\nlet imageFile = null;\n\nif (msg.req && msg.req.files) {\n  const files = msg.req.files;\n  if (Array.isArray(files) && files.length > 0) imageFile = files[0];\n  else {\n    const keys = Object.keys(files);\n    if (keys.length > 0 && Array.isArray(files[keys[0]]) && files[keys[0]].length > 0) {\n      imageFile = files[keys[0]][0];\n    }\n  }\n}\n\nif (imageFile && imageFile.buffer) {\n  const saveDir = \"D:\\\\Apache\\\\Apache24\\\\nguyennhukhiem\\\\images\\\\\";\n  const fileName = Date.now() + \"-\" + imageFile.originalname;\n  msg.filename = saveDir + fileName;\n  msg.payload = imageFile.buffer;\n  msg.fileSaved = true;\n  msg.fileNameOnly = fileName;\n} else {\n  msg.fileSaved = false;\n  msg.fileNameOnly = null;\n}\n\nmsg.fields = fields;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 400,
+        "wires": [
+            [
+                "c4dc148d79e0c22f",
+                "a8aa2d9ad0c98a21"
+            ]
+        ]
+    },
+    {
+        "id": "b521a65bbf8210f0",
+        "type": "http in",
+        "z": "27ef7aab3842140d",
+        "g": "8116e083b117f435",
+        "name": "API thêm sản phẩm",
+        "url": "/sanpham",
+        "method": "post",
+        "upload": true,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 480,
+        "wires": [
+            [
+                "fdceae81441c4c77"
+            ]
+        ]
+    },
+    {
+        "id": "1cad2f7b9ceafa90",
+        "type": "MSSQL",
+        "z": "27ef7aab3842140d",
+        "g": "8116e083b117f435",
+        "mssqlCN": "cf909bcd9ab32d04",
+        "name": "Thêm sản phẩm vào SQL",
+        "outField": "payload",
+        "returnType": 0,
+        "throwErrors": 1,
+        "query": "",
+        "modeOpt": "",
+        "modeOptType": "query",
+        "queryOpt": "topic",
+        "queryOptType": "msg",
+        "paramsOpt": "payload",
+        "paramsOptType": "msg",
+        "rows": "rows",
+        "rowsType": "msg",
+        "parseMustache": true,
+        "params": [],
+        "x": 1170,
+        "y": 380,
+        "wires": [
+            [
+                "d677b751cffe7124",
+                "19009041121dd3e9"
+            ]
+        ]
+    },
+    {
+        "id": "255feac48839031c",
+        "type": "http response",
+        "z": "27ef7aab3842140d",
+        "g": "8116e083b117f435",
+        "name": "HTTP Response",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 1740,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "d677b751cffe7124",
+        "type": "debug",
+        "z": "27ef7aab3842140d",
+        "g": "8116e083b117f435",
+        "name": "debug - Kết quả Insert",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1450,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "22dd73d47bcc346b",
+        "type": "function",
+        "z": "27ef7aab3842140d",
+        "g": "1a8e66f2282184be",
+        "name": "function ( xử lý query string )",
+        "func": "const keyword = msg.req.query.q || '';\nmsg.payload = `SELECT * FROM SanPham WHERE TenSP LIKE N'%${keyword}%'`;\nmsg.topic = msg.payload;\nmsg.queryType = \"query\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 180,
+        "wires": [
+            [
+                "52f4b3b183ce4842"
+            ]
+        ]
+    },
+    {
+        "id": "a741453c3a5ba367",
+        "type": "http in",
+        "z": "27ef7aab3842140d",
+        "g": "1a8e66f2282184be",
+        "name": "API tìm kiếm sản phẩm",
+        "url": "/timkiem",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 300,
+        "y": 180,
+        "wires": [
+            [
+                "22dd73d47bcc346b"
+            ]
+        ]
+    },
+    {
+        "id": "52f4b3b183ce4842",
+        "type": "MSSQL",
+        "z": "27ef7aab3842140d",
+        "g": "1a8e66f2282184be",
+        "mssqlCN": "cf909bcd9ab32d04",
+        "name": "Truy vấn sản phẩm",
+        "outField": "payload",
+        "returnType": 0,
+        "throwErrors": 1,
+        "query": "",
+        "modeOpt": "",
+        "modeOptType": "query",
+        "queryOpt": "payload",
+        "queryOptType": "editor",
+        "paramsOpt": "queryParams",
+        "paramsOptType": "none",
+        "rows": "rows",
+        "rowsType": "msg",
+        "parseMustache": true,
+        "params": [],
+        "x": 870,
+        "y": 180,
+        "wires": [
+            [
+                "8c57f95cf1cfe7c4",
+                "144344c6d2e89725"
+            ]
+        ]
+    },
+    {
+        "id": "8c57f95cf1cfe7c4",
+        "type": "http response",
+        "z": "27ef7aab3842140d",
+        "g": "1a8e66f2282184be",
+        "name": "Trả JSON kết quả",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 1230,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "144344c6d2e89725",
+        "type": "debug",
+        "z": "27ef7aab3842140d",
+        "g": "1a8e66f2282184be",
+        "name": "debug - kết quả SQL",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1240,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "19009041121dd3e9",
+        "type": "function",
+        "z": "27ef7aab3842140d",
+        "g": "8116e083b117f435",
+        "name": "Thêm thành công",
+        "func": "msg.payload = {\n    success: true,\n    message: \"Thêm sản phẩm thành công!\",\n    data: msg.payload\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1490,
+        "y": 380,
+        "wires": [
+            [
+                "255feac48839031c"
+            ]
+        ]
+    },
+    {
+        "id": "a8aa2d9ad0c98a21",
+        "type": "file",
+        "z": "27ef7aab3842140d",
+        "g": "8116e083b117f435",
+        "name": "Ghi file ảnh",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 870,
+        "y": 360,
+        "wires": [
+            [
+                "1ee5a1719de03e5a"
+            ]
+        ]
+    },
+    {
+        "id": "1ee5a1719de03e5a",
+        "type": "function",
+        "z": "27ef7aab3842140d",
+        "g": "8116e083b117f435",
+        "name": "function - Chuẩn bị SQL Insert",
+        "func": "const fields = msg.fields || {};\nconst fileName = msg.fileNameOnly || null;\n\nmsg.topic = `\nINSERT INTO SanPham (TenSP, LoaiSP, Gia, SoLuong, MoTa, HinhAnh)\nVALUES (@TenSP, @LoaiSP, @Gia, @SoLuong, @MoTa, @HinhAnh)\n`;\n\nmsg.params = [\n    { name: 'TenSP', value: fields.TenSP || '', type: 'NVarChar' },\n    { name: 'LoaiSP', value: fields.LoaiSP || '', type: 'NVarChar' },\n    { name: 'Gia', value: Number(fields.Gia) || 0, type: 'Float' },\n    { name: 'SoLuong', value: Number(fields.SoLuong) || 0, type: 'Int' },\n    { name: 'MoTa', value: fields.MoTa || '', type: 'NVarChar' },\n    { name: 'HinhAnh', value: fileName ? \"images/\" + fileName : null, type: 'NVarChar' }\n];\n\nmsg.payload = msg.params; // 👈 quan trọng để MSSQL node nhận đúng\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 540,
+        "wires": [
+            [
+                "1cad2f7b9ceafa90"
+            ]
+        ]
+    },
+    {
+        "id": "c4dc148d79e0c22f",
+        "type": "debug",
+        "z": "27ef7aab3842140d",
+        "g": "8116e083b117f435",
+        "name": "debug - xử lý dữ liệu",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "decf16bfb644c5c4",
+        "type": "function",
+        "z": "27ef7aab3842140d",
+        "g": "0934046e3a0e276b",
+        "name": "function - Xử lý dữ liệu",
+        "func": "let fields = {};\nif (msg.req && msg.req.body) {\n    if (Buffer.isBuffer(msg.req.body)) {\n        try {\n            fields = JSON.parse(msg.req.body.toString());\n        } catch (e) {\n            fields = {};\n        }\n    } else {\n        fields = msg.req.body;\n    }\n} else if (msg.payload) {\n    fields = msg.payload;\n}\n\nmsg.fields = fields;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 720,
+        "wires": [
+            [
+                "bab6bbede4c4f760"
+            ]
+        ]
+    },
+    {
+        "id": "c4e393bdfe158554",
+        "type": "http in",
+        "z": "27ef7aab3842140d",
+        "g": "0934046e3a0e276b",
+        "name": "API sửa sản phẩm",
+        "url": "/sanpham/:id",
+        "method": "put",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 800,
+        "wires": [
+            [
+                "decf16bfb644c5c4"
+            ]
+        ]
+    },
+    {
+        "id": "a756c2aae5402246",
+        "type": "MSSQL",
+        "z": "27ef7aab3842140d",
+        "g": "0934046e3a0e276b",
+        "mssqlCN": "cf909bcd9ab32d04",
+        "name": "Cập nhật sản phẩm vào SQL",
+        "outField": "payload",
+        "returnType": 0,
+        "throwErrors": 1,
+        "query": "",
+        "modeOpt": "",
+        "modeOptType": "query",
+        "queryOpt": "topic",
+        "queryOptType": "msg",
+        "paramsOpt": "payload",
+        "paramsOptType": "msg",
+        "rows": "rows",
+        "rowsType": "msg",
+        "parseMustache": true,
+        "params": [],
+        "x": 1060,
+        "y": 800,
+        "wires": [
+            [
+                "37b63c6912760414",
+                "b1b2b4b6331d85a4"
+            ]
+        ]
+    },
+    {
+        "id": "e1e6015122f21997",
+        "type": "http response",
+        "z": "27ef7aab3842140d",
+        "g": "0934046e3a0e276b",
+        "name": "HTTP Response",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 1660,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "37b63c6912760414",
+        "type": "debug",
+        "z": "27ef7aab3842140d",
+        "g": "0934046e3a0e276b",
+        "name": "debug - Kết quả Update",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1470,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "b1b2b4b6331d85a4",
+        "type": "function",
+        "z": "27ef7aab3842140d",
+        "g": "0934046e3a0e276b",
+        "name": "function 1",
+        "func": "msg.payload = {\n    success: true,\n    message: \"Sửa sản phẩm thành công!\",\n    data: msg.payload\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1340,
+        "y": 720,
+        "wires": [
+            [
+                "e1e6015122f21997"
+            ]
+        ]
+    },
+    {
+        "id": "bab6bbede4c4f760",
+        "type": "function",
+        "z": "27ef7aab3842140d",
+        "g": "0934046e3a0e276b",
+        "name": "function - Chuẩn bị SQL Update",
+        "func": "const fields = msg.fields || {};\nconst id = msg.req.params.id;\n\nmsg.topic = `\nUPDATE SanPham\nSET TenSP = @TenSP, LoaiSP = @LoaiSP, Gia = @Gia, SoLuong = @SoLuong, MoTa = @MoTa\nWHERE MaSP = @MaSP\n`;\n\nmsg.params = [\n    { name: 'MaSP', value: id, type: 'Int' },\n    { name: 'TenSP', value: fields.TenSP || '', type: 'NVarChar' },\n    { name: 'LoaiSP', value: fields.LoaiSP || '', type: 'NVarChar' },\n    { name: 'Gia', value: Number(fields.Gia) || 0, type: 'Float' },\n    { name: 'SoLuong', value: Number(fields.SoLuong) || 0, type: 'Int' },\n    { name: 'MoTa', value: fields.MoTa || '', type: 'NVarChar' }\n];\n\nmsg.payload = msg.params;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 800,
+        "wires": [
+            [
+                "a756c2aae5402246"
+            ]
+        ]
+    },
+    {
+        "id": "c8bc470f249a0d28",
+        "type": "http in",
+        "z": "27ef7aab3842140d",
+        "g": "f15b3167c14de10e",
+        "name": "API xóa sản phẩm",
+        "url": "/sanpham/:id",
+        "method": "delete",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 1060,
+        "wires": [
+            [
+                "089b0f45f7f04323"
+            ]
+        ]
+    },
+    {
+        "id": "089b0f45f7f04323",
+        "type": "function",
+        "z": "27ef7aab3842140d",
+        "g": "f15b3167c14de10e",
+        "name": "Tiền xử lý xóa",
+        "func": "const id = msg.req.params.id;\nmsg.payload = {\n    MaSP: parseInt(id)\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "x": 530,
+        "y": 1060,
+        "wires": [
+            [
+                "c293f26bb56d0373"
+            ]
+        ]
+    },
+    {
+        "id": "c293f26bb56d0373",
+        "type": "MSSQL",
+        "z": "27ef7aab3842140d",
+        "g": "f15b3167c14de10e",
+        "mssqlCN": "cf909bcd9ab32d04",
+        "name": "Truy vấn SQL Delete",
+        "outField": "payload",
+        "returnType": 0,
+        "throwErrors": 1,
+        "query": "DELETE FROM SanPham WHERE MaSP = @MaSP",
+        "modeOpt": "",
+        "modeOptType": "query",
+        "queryOpt": "",
+        "queryOptType": "editor",
+        "paramsOpt": "",
+        "paramsOptType": "editor",
+        "rows": "rows",
+        "rowsType": "msg",
+        "parseMustache": true,
+        "params": [
+            {
+                "output": false,
+                "name": "MaSP",
+                "type": "Int",
+                "valueType": "msg",
+                "value": "payload.MaSP",
+                "options": {
+                    "nullable": true,
+                    "primary": false,
+                    "identity": false,
+                    "readOnly": false
+                }
+            }
+        ],
+        "x": 830,
+        "y": 1060,
+        "wires": [
+            [
+                "20ae0816ea0d5194"
+            ]
+        ]
+    },
+    {
+        "id": "20ae0816ea0d5194",
+        "type": "function",
+        "z": "27ef7aab3842140d",
+        "g": "f15b3167c14de10e",
+        "name": "Xử lý phản hồi xóa",
+        "func": "if (msg.error) {\n    msg.payload = {\n        success: false,\n        message: \"Lỗi khi xóa: \" + (msg.error.message || \"Không xác định\")\n    };\n} else if (!msg.error && (msg.payload === undefined || (msg.payload.rowsAffected && msg.payload.rowsAffected[0] > 0))) {\n    msg.payload = {\n        success: true,\n        message: \"Xóa sản phẩm thành công!\"\n    };\n} else {\n    msg.payload = {\n        success: false,\n        message: \"Xóa thất bại. Không tìm thấy sản phẩm hoặc lỗi.\"\n    };\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "x": 1110,
+        "y": 1060,
+        "wires": [
+            [
+                "4492a5d447d9fcbe",
+                "ebe5c1ad51c4b47c"
+            ]
+        ]
+    },
+    {
+        "id": "4492a5d447d9fcbe",
+        "type": "http response",
+        "z": "27ef7aab3842140d",
+        "g": "f15b3167c14de10e",
+        "name": "Phản hồi xóa",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 1490,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "ebe5c1ad51c4b47c",
+        "type": "debug",
+        "z": "27ef7aab3842140d",
+        "g": "f15b3167c14de10e",
+        "name": "debug - Kết quả Delete",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1530,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "6cd460947ce116b1",
+        "type": "inject",
+        "z": "27ef7aab3842140d",
+        "g": "8116e083b117f435",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"TenSP\":\"Bút bi Thiên Long\",\"LoaiSP\":\"Văn phòng phẩm\",\"Gia\":50003,\"SoLuong\":2040,\"MoTa\":\"Bút bi mực xanh, đầu nhỏ, viết mượt\",\"HinhAnh\":null}",
+        "payloadType": "json",
+        "x": 250,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b27992fa3bf7dd8",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-mssql-plus": "0.13.1"
+        }
+    }
+]
