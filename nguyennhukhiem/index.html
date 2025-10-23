@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bách Hoá Xanh</title>
+  <link rel="stylesheet" href="nguyennhukhien.css" />
+  <link rel="icon" href="images/icon.jpg" type="image/png"
+</head>
+<body>
+  <header>
+    <h1>🛍️ Cửa hàng Như Khiêm</h1>
+    <button id="menuBtn" class="menu-btn" aria-label="Mở quản lý">☰</button>
+  </header>
+
+  <main>
+    <section class="search-area">
+      <input id="keyword" type="text" placeholder="Nhập tên sản phẩm..." />
+      <button id="searchBtn">Tìm kiếm</button>
+    </section>
+
+    <section>
+      <h2>Danh sách sản phẩm</h2>
+      <div id="ketqua" class="result-container"></div>
+    </section>
+  </main>
+
+  <!-- Modal quản lý (một cửa sổ riêng) -->
+  <div id="crudModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">✖</button>
+      <h2>Quản lý sản phẩm</h2>
+
+      <div class="modal-actions">
+        <button id="btnAddRow" class="add-btn">➕ Thêm hàng mới</button>
+        <button id="btnRefreshTable" class="action-btn">⟳ Tải lại</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="bangSanPham" class="manage-table">
+          <thead>
+            <tr>
+              <th>Tên</th>
+              <th>Loại</th>
+              <th>Giá</th>
+              <th>Số lượng</th>
+              <th>Mô tả</th>
+              <th>Hình ảnh</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="nguyennhukhien.js"></script>
+</body>
+</html>
